@@ -8,3 +8,4 @@ seaborn
 python-dotenv
 joblib
 python-multipart
+openai
