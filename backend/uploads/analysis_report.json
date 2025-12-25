@@ -1,0 +1,168 @@
+{
+    "missing_values": {
+        "Country": 0,
+        "Year": 0,
+        "Forest_Loss_Area_km2": 0,
+        "Tree_Cover_Loss_percent": 0,
+        "CO2_Emission_mt": 0,
+        "Rainfall_mm": 0,
+        "Population": 0,
+        "GDP_Billion_USD": 0,
+        "Agriculture_Land_Percent": 0,
+        "Deforestation_Policy_Strictness": 0,
+        "Corruption_Index": 0,
+        "International_Aid_Million_USD": 0,
+        "Illegal_Lumbering_Incidents": 0,
+        "Protected_Areas_Percent": 0
+    },
+    "numeric_columns": [
+        "Year",
+        "Forest_Loss_Area_km2",
+        "Tree_Cover_Loss_percent",
+        "CO2_Emission_mt",
+        "Rainfall_mm",
+        "Population",
+        "GDP_Billion_USD",
+        "Agriculture_Land_Percent",
+        "Deforestation_Policy_Strictness",
+        "Corruption_Index",
+        "International_Aid_Million_USD",
+        "Illegal_Lumbering_Incidents",
+        "Protected_Areas_Percent"
+    ],
+    "categorical_columns": [
+        "Country"
+    ],
+    "statistics": {
+        "Year": {
+            "count": 100.0,
+            "mean": 1973.9,
+            "std": 30.52156051983018,
+            "min": 1925.0,
+            "25%": 1946.75,
+            "50%": 1972.5,
+            "75%": 1997.25,
+            "max": 2023.0
+        },
+        "Forest_Loss_Area_km2": {
+            "count": 100.0,
+            "mean": 2402.04,
+            "std": 1289.3577127838307,
+            "min": 503.0,
+            "25%": 1288.5,
+            "50%": 2159.0,
+            "75%": 3495.5,
+            "max": 4949.0
+        },
+        "Tree_Cover_Loss_percent": {
+            "count": 100.0,
+            "mean": 5.581324193384242,
+            "std": 2.486552166977507,
+            "min": 1.535527573084003,
+            "25%": 3.409892476371432,
+            "50%": 5.540552562133609,
+            "75%": 7.642558076143221,
+            "max": 9.791851373364675
+        },
+        "CO2_Emission_mt": {
+            "count": 100.0,
+            "mean": 249.78,
+            "std": 131.9472331018439,
+            "min": 18.0,
+            "25%": 142.75,
+            "50%": 257.0,
+            "75%": 358.5,
+            "max": 484.0
+        },
+        "Rainfall_mm": {
+            "count": 100.0,
+            "mean": 1989.0656748231634,
+            "std": 580.7399022393769,
+            "min": 1012.3521374587668,
+            "25%": 1519.817400554189,
+            "50%": 1875.4243599947035,
+            "75%": 2543.1707328508855,
+            "max": 2984.6020773700407
+        },
+        "Population": {
+            "count": 100.0,
+            "mean": 46698428.53,
+            "std": 28212653.49017961,
+            "min": 1882729.0,
+            "25%": 23535566.25,
+            "50%": 44224060.5,
+            "75%": 71149593.25,
+            "max": 97834250.0
+        },
+        "GDP_Billion_USD": {
+            "count": 100.0,
+            "mean": 2522.2613989914507,
+            "std": 1428.2571751846872,
+            "min": 66.69227953585165,
+            "25%": 1331.4295680118046,
+            "50%": 2517.9563627768603,
+            "75%": 3694.9468354070605,
+            "max": 4902.380881847538
+        },
+        "Agriculture_Land_Percent": {
+            "count": 100.0,
+            "mean": 34.69967166034653,
+            "std": 14.939793388460519,
+            "min": 10.735280990906572,
+            "25%": 22.34147367468561,
+            "50%": 33.26558241784488,
+            "75%": 48.17311904859726,
+            "max": 59.66608223471041
+        },
+        "Deforestation_Policy_Strictness": {
+            "count": 100.0,
+            "mean": 2.58,
+            "std": 1.1475049789729355,
+            "min": 1.0,
+            "25%": 2.0,
+            "50%": 3.0,
+            "75%": 4.0,
+            "max": 4.0
+        },
+        "Corruption_Index": {
+            "count": 100.0,
+            "mean": 47.242960887198606,
+            "std": 28.615150845277267,
+            "min": 0.1428651005822567,
+            "25%": 27.49268411985832,
+            "50%": 43.28126262727576,
+            "75%": 72.92469820963143,
+            "max": 99.49228375628628
+        },
+        "International_Aid_Million_USD": {
+            "count": 100.0,
+            "mean": 248.17,
+            "std": 144.8169903950179,
+            "min": 0.0,
+            "25%": 121.25,
+            "50%": 255.0,
+            "75%": 344.5,
+            "max": 499.0
+        },
+        "Illegal_Lumbering_Incidents": {
+            "count": 100.0,
+            "mean": 101.59,
+            "std": 60.859516158697055,
+            "min": 2.0,
+            "25%": 55.5,
+            "50%": 95.5,
+            "75%": 159.25,
+            "max": 199.0
+        },
+        "Protected_Areas_Percent": {
+            "count": 100.0,
+            "mean": 17.44018871376467,
+            "std": 7.747758679764871,
+            "min": 5.259524537589484,
+            "25%": 10.27476245045617,
+            "50%": 17.969884237471636,
+            "75%": 24.43992259404367,
+            "max": 29.94412139180156
+        }
+    }
+}
