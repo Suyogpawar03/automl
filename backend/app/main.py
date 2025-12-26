@@ -4,9 +4,14 @@ import json
 
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "..", ".env"))
 
-
 from openai import OpenAI
-client_ai = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+client_ai = None
+OPENAI_KEY = os.getenv("OPENAI_API_KEY")
+
+if OPENAI_KEY:
+    client_ai = OpenAI(api_key=OPENAI_KEY)
+
 
 
 
