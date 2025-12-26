@@ -76,28 +76,17 @@ def root():
     return {"status": "API is running"}
 
 
-from io import BytesIO
-from fastapi import HTTPException
+from shutil import copyfileobj
 
 @app.post("/upload")
 async def upload_dataset(file: UploadFile = File(...)):
-    global latest_file_path
-
     try:
-        if not file.filename.endswith(".csv"):
-            raise HTTPException(status_code=400, detail="Only CSV files allowed")
-
-        contents = await file.read()
-        if not contents:
-            raise HTTPException(status_code=400, detail="Uploaded file is empty")
-
         file_path = os.path.join(UPLOAD_DIR, file.filename)
-        with open(file_path, "wb") as f:
-            f.write(contents)
 
-        latest_file_path = file_path
+        with open(file_path, "wb") as buffer:
+            copyfileobj(file.file, buffer)  # ✅ SAFE STREAM COPY
 
-        df = pd.read_csv(BytesIO(contents))
+        df = pd.read_csv(file_path)
 
         return {
             "message": "File uploaded successfully",
@@ -106,12 +95,12 @@ async def upload_dataset(file: UploadFile = File(...)):
             "column_names": df.columns.tolist()
         }
 
-    except HTTPException:
-        raise
-
     except Exception as e:
-        print("UPLOAD ERROR:", str(e))
-        raise HTTPException(status_code=500, detail=str(e))
+        return {
+            "error": "CSV upload failed",
+            "details": str(e)
+        }
+
 
 
 
