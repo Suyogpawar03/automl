@@ -15,6 +15,7 @@ client_ai = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 
 from fastapi import FastAPI, UploadFile, File
+
 import pandas as pd
 import os
 import json
@@ -22,6 +23,7 @@ import joblib
 import requests
 import os
 import json
+
 
 import matplotlib
 matplotlib.use("Agg")
@@ -49,6 +51,17 @@ from sklearn.decomposition import PCA
 
 app = FastAPI()
 
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # allow all for now
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 UPLOAD_DIR = "uploads"
 PLOT_DIR = "plots"
 
@@ -63,23 +76,38 @@ def root():
     return {"status": "API is running"}
 
 
+from io import BytesIO
+
 @app.post("/upload")
 async def upload_dataset(file: UploadFile = File(...)):
     global latest_file_path
 
-    file_path = os.path.join(UPLOAD_DIR, file.filename)
-    with open(file_path, "wb") as f:
-        f.write(await file.read())
+    try:
+        # Read file ONCE
+        contents = await file.read()
 
-    latest_file_path = file_path
-    df = pd.read_csv(file_path)
+        # Save file
+        file_path = os.path.join(UPLOAD_DIR, file.filename)
+        with open(file_path, "wb") as f:
+            f.write(contents)
 
-    return {
-        "message": "File uploaded successfully",
-        "rows": df.shape[0],
-        "columns": df.shape[1],
-        "column_names": df.columns.tolist()
-    }
+        latest_file_path = file_path
+
+        # Read CSV safely from memory
+        df = pd.read_csv(BytesIO(contents))
+
+        return {
+            "message": "File uploaded successfully",
+            "rows": df.shape[0],
+            "columns": df.shape[1],
+            "column_names": df.columns.tolist()
+        }
+
+    except Exception as e:
+        return {
+            "error": "Cannot read uploaded file",
+            "details": str(e)
+        }
 
 
 @app.get("/analyze")
