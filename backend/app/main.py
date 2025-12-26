@@ -77,23 +77,26 @@ def root():
 
 
 from io import BytesIO
+from fastapi import HTTPException
 
 @app.post("/upload")
 async def upload_dataset(file: UploadFile = File(...)):
     global latest_file_path
 
     try:
-        # Read file ONCE
-        contents = await file.read()
+        if not file.filename.endswith(".csv"):
+            raise HTTPException(status_code=400, detail="Only CSV files allowed")
 
-        # Save file
+        contents = await file.read()
+        if not contents:
+            raise HTTPException(status_code=400, detail="Uploaded file is empty")
+
         file_path = os.path.join(UPLOAD_DIR, file.filename)
         with open(file_path, "wb") as f:
             f.write(contents)
 
         latest_file_path = file_path
 
-        # Read CSV safely from memory
         df = pd.read_csv(BytesIO(contents))
 
         return {
@@ -103,11 +106,13 @@ async def upload_dataset(file: UploadFile = File(...)):
             "column_names": df.columns.tolist()
         }
 
+    except HTTPException:
+        raise
+
     except Exception as e:
-        return {
-            "error": "Cannot read uploaded file",
-            "details": str(e)
-        }
+        print("UPLOAD ERROR:", str(e))
+        raise HTTPException(status_code=500, detail=str(e))
+
 
 
 @app.get("/analyze")
