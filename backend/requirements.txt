@@ -11,3 +11,4 @@ python-dotenv
 joblib
 python-multipart
 openai
+reportlab
